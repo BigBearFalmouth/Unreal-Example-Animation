@@ -3,6 +3,10 @@
 #include "AnimationTest.h"
 #include "ScoreSorter.h"
 
+//overriding the < operator
+bool operator <(const FPlayerScore& x, const FPlayerScore& y) {
+	return x.Score < y.Score;
+}
 
 // Sets default values for this component's properties
 UScoreSorter::UScoreSorter()
@@ -49,11 +53,13 @@ void UScoreSorter::AddScore(const FPlayerScore &Score)
 //Sort sorts the score
 void UScoreSorter::Sort()
 {
-	//this is a predicate anyonmous function without this we would need to overide the < operator in our
-	//structure
-	CurrentScores.Sort([](const FPlayerScore& A, const FPlayerScore& B)
+	//this is a predicate anyonmous function without this we would need to overide the < operator for our
+	//structure (this is providing our own sorting, if we don't have this it will use < operator)
+	/*CurrentScores.Sort([](const FPlayerScore& A, const FPlayerScore& B)
 	{
-		return A.Score < B.Score;
-	});
+		return A.Score > B.Score;
+	});*/
+
+	CurrentScores.Sort();
 }
 
